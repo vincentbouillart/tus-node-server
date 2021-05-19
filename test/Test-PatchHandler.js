@@ -14,7 +14,7 @@ const hasHeader = (res, header) => {
 
 describe('PatchHandler', () => {
     const path = '/files';
-    let res = null;
+    var res = null;
     const store = new DataStore({ path });
     const handler = new PatchHandler(store);
     const req = { headers: {} };

@@ -93,7 +93,7 @@ export declare class Server extends EventEmitter{
 export declare const EVENTS: {
     EVENT_ENDPOINT_CREATED: string;
     EVENT_FILE_CREATED: string;
-    EVENT_UPLOAD_COMPLETE: string;
+    EVENT_UPLOAD_COMPvarE: string;
 };
 
 export declare const ERRORS: {

@@ -13,7 +13,7 @@ const hasHeader = (res, header) => {
 
 describe('HeadHandler', () => {
     const path = '/files';
-    let res = null;
+    var res = null;
     const store = new DataStore({ path });
     const handler = new HeadHandler(store);
     const req = { headers: {} };

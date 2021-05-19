@@ -14,7 +14,7 @@ const hasHeader = (res, header) => {
 
 describe('PostHandler', () => {
     const path = '/files';
-    let res = null;
+    var res = null;
     const namingFunction = (req) => req.url.replace(/\//g, '-');
     const store = new DataStore({ path, namingFunction });
     const handler = new PostHandler(store);

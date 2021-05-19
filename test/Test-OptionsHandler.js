@@ -11,16 +11,16 @@ const ALLOWED_HEADERS = require('../lib/constants').ALLOWED_HEADERS;
 const EXPOSED_HEADERS = require('../lib/constants').EXPOSED_HEADERS;
 const MAX_AGE = require('../lib/constants').MAX_AGE;
 
-let hasHeader = (res, header) => {
-    let key = Object.keys(header)[0];
+var hasHeader = (res, header) => {
+    var key = Object.keys(header)[0];
     return res._header.indexOf(`${key}: ${header[key]}`) > -1;
 }
 
 describe('OptionsHandler', () => {
-    let res = null;
-    let store = new DataStore({ path: '/files' });
-    let handler = new OptionsHandler(store);
-    let req = { headers: {} };
+    var res = null;
+    var store = new DataStore({ path: '/files' });
+    var handler = new OptionsHandler(store);
+    var req = { headers: {} };
 
     beforeEach((done) => {
         const METHOD = 'OPTIONS';
@@ -29,7 +29,7 @@ describe('OptionsHandler', () => {
     });
 
     it('send() should set headers and 204', (done) => {
-        let headers = {
+        var headers = {
             'Access-Control-Allow-Methods': ALLOWED_METHODS,
             'Access-Control-Allow-Headers': ALLOWED_HEADERS,
             'Access-Control-Expose-Headers': EXPOSED_HEADERS,
@@ -42,11 +42,11 @@ describe('OptionsHandler', () => {
     });
 
     it('send() should set extensions header if they exist', (done) => {
-        let headers = {
+        var headers = {
             'Tus-Extension': 'creation,expiration',
         };
         store.extensions = ['creation', 'expiration'];
-        let handler = new OptionsHandler(store);
+        var handler = new OptionsHandler(store);
         handler.send(req, res);
         assert.equal(hasHeader(res, headers), true)
         done();

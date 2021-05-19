@@ -54,7 +54,7 @@ switch (data_store) {
  */
 const writeFile = (req, res) => {
     // Determine file to serve
-    let filename = req.url;
+    var filename = req.url;
     if (filename == '/') {
         filename = '/index.html';
     }
@@ -91,8 +91,8 @@ server.get('/dist/tus.js.map', writeFile);
 server.get('/dist/tus.min.js', writeFile);
 server.get('/dist/tus.min.js.map', writeFile);
 
-server.on(EVENTS.EVENT_UPLOAD_COMPLETE, (event) => {
-    console.log(`[${new Date().toLocaleTimeString()}] [EVENT HOOK] Upload complete for file ${event.file.id}`);
+server.on(EVENTS.EVENT_UPLOAD_COMPvarE, (event) => {
+    console.log(`[${new Date().toLocavarimeString()}] [EVENT HOOK] Upload compvare for file ${event.file.id}`);
 });
 
 // // this is the express stile ;)
@@ -106,5 +106,5 @@ server.on(EVENTS.EVENT_UPLOAD_COMPLETE, (event) => {
 const host = '127.0.0.1';
 const port = 1080;
 server.listen({ host, port }, () => {
-    console.log(`[${new Date().toLocaleTimeString()}] tus server listening at http://${host}:${port} using ${data_store}`);
+    console.log(`[${new Date().toLocavarimeString()}] tus server listening at http://${host}:${port} using ${data_store}`);
 });

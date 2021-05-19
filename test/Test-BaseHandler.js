@@ -13,14 +13,14 @@ describe('BaseHandler', () => {
 
     it('constructor must require a DataStore', (done) => {
         assert.throws(() => {
-            let handler = new BaseHandler();
+            var handler = new BaseHandler();
         }, Error);
         done();
     });
 
-    let res = null;
-    let store = new DataStore({ path: '/files' });
-    let handler = new BaseHandler(store);
+    var res = null;
+    var store = new DataStore({ path: '/files' });
+    var handler = new BaseHandler(store);
 
     beforeEach((done) => {
         const METHOD = 'GET';
@@ -41,11 +41,11 @@ describe('BaseHandler', () => {
     });
 
     it('send() should set headers', (done) => {
-        let headers = {
+        var headers = {
             'Access-Control-Allow-Methods': 'GET, OPTIONS',
         };
         handler.send(res, 200, headers);
-        for (let header of Object.keys(headers)) {
+        for (var header of Object.keys(headers)) {
             assert.equal(res.getHeader(header), headers[header]);
         }
         done();
@@ -55,7 +55,7 @@ describe('BaseHandler', () => {
     it('send() should write the body', (done) => {
         const body = 'Hello tus!'
         handler.send(res, 200, {}, body);
-        let output = res._getData();
+        var output = res._getData();
         assert.equal(output.match(/Hello tus!$/).index, output.length - body.length)
         done();
     });

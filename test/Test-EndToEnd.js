@@ -29,23 +29,23 @@ const gcs = new Storage({
 });
 
 const bucket = gcs.bucket(BUCKET);
-const deleteFile = (file_name) => {
+const devareFile = (file_name) => {
     return new Promise((resolve, reject) => {
-        console.log(`[GCLOUD] Deleting ${file_name} from ${bucket.name} bucket`);
-        bucket.file(file_name).delete((err, res) => {
+        console.log(`[GCLOUD] Devaring ${file_name} from ${bucket.name} bucket`);
+        bucket.file(file_name).devare((err, res) => {
             resolve(res);
         });
     });
 };
 
 describe('EndToEnd', () => {
-    let server;
-    let listener;
-    let agent;
-    let file_to_delete;
+    var server;
+    var listener;
+    var agent;
+    var file_to_devare;
     describe('FileStore', () => {
-        let file_id;
-        let deferred_file_id;
+        var file_id;
+        var deferred_file_id;
         before(() => {
             server = new Server();
             server.datastore = new FileStore({
@@ -80,7 +80,7 @@ describe('EndToEnd', () => {
         });
 
         describe('POST', () => {
-            it('should create a file that will be deleted', (done) => {
+            it('should create a file that will be devared', (done) => {
                 agent.post(STORE_PATH)
                 .set('Tus-Resumable', TUS_RESUMABLE)
                 .set('Upload-Defer-Length', 1)
@@ -90,7 +90,7 @@ describe('EndToEnd', () => {
                     assert.equal('location' in res.headers, true);
                     assert.equal(res.headers['tus-resumable'], TUS_RESUMABLE);
                     // Save the id for subsequent tests
-                    file_to_delete = res.headers.location.split('/').pop();
+                    file_to_devare = res.headers.location.split('/').pop();
                     done();
                 });
             });
@@ -130,14 +130,14 @@ describe('EndToEnd', () => {
 
         describe('HEAD', () => {
             before((done) => {
-                // Remove the file to delete for 410 Gone test
-                rimraf(FILES_DIRECTORY + '/' + file_to_delete, () => {
+                // Remove the file to devare for 410 Gone test
+                rimraf(FILES_DIRECTORY + '/' + file_to_devare, () => {
                     return done();
                 });
             });
 
-            it('should return 410 Gone for the file that has been deleted', (done) => {
-                agent.head(`${STORE_PATH}/${file_to_delete}`)
+            it('should return 410 Gone for the file that has been devared', (done) => {
+                agent.head(`${STORE_PATH}/${file_to_devare}`)
                 .set('Tus-Resumable', TUS_RESUMABLE)
                 .expect(410)
                 .expect('Tus-Resumable', TUS_RESUMABLE)
@@ -269,8 +269,8 @@ describe('EndToEnd', () => {
             return;
         }
 
-        let file_id;
-        let deferred_file_id;
+        var file_id;
+        var deferred_file_id;
         const files_created = [];
         before(() => {
             server = new Server();
@@ -285,9 +285,9 @@ describe('EndToEnd', () => {
         });
 
         after((done) => {
-            // Delete these files from the bucket for cleanup
-            const deletions = files_created.map((file_name) => deleteFile(file_name));
-            Promise.all(deletions).then(() => {
+            // Devare these files from the bucket for cleanup
+            const devarions = files_created.map((file_name) => devareFile(file_name));
+            Promise.all(devarions).then(() => {
                 return done();
             }).catch(done);
 
@@ -305,7 +305,7 @@ describe('EndToEnd', () => {
         });
 
         describe('POST', () => {
-            // it('should create a file that will be deleted', (done) => {
+            // it('should create a file that will be devared', (done) => {
             //     agent.post(STORE_PATH)
             //     .set('Tus-Resumable', TUS_RESUMABLE)
             //     .set('Upload-Defer-Length', 1)
@@ -315,8 +315,8 @@ describe('EndToEnd', () => {
             //         assert.equal('location' in res.headers, true);
             //         assert.equal(res.headers['tus-resumable'], TUS_RESUMABLE);
             //         // Save the id for subsequent tests
-            //         file_to_delete = res.headers.location.split('/').pop();
-            //         files_created.push(file_to_delete.split('&upload_id')[0])
+            //         file_to_devare = res.headers.location.split('/').pop();
+            //         files_created.push(file_to_devare.split('&upload_id')[0])
             //         done();
             //     });
             // });
@@ -358,11 +358,11 @@ describe('EndToEnd', () => {
 
         describe('HEAD', () => {
             before(() => {
-                // Remove the file to delete for 410 Gone test
+                // Remove the file to devare for 410 Gone test
             });
 
-            // it('should return 410 Gone for the file that has been deleted', (done) => {
-            //     agent.head(`${STORE_PATH}/${file_to_delete}`)
+            // it('should return 410 Gone for the file that has been devared', (done) => {
+            //     agent.head(`${STORE_PATH}/${file_to_devare}`)
             //     .set('Tus-Resumable', TUS_RESUMABLE)
             //     .expect(410)
             //     .expect('Tus-Resumable', TUS_RESUMABLE)

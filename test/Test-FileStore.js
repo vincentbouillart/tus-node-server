@@ -20,7 +20,7 @@ const TEST_FILE_NAME = 'test_file.mp4';
 
 
 describe('FileStore', () => {
-    let server;
+    var server;
 
     before((done) => {
         server = new Server();
@@ -175,9 +175,9 @@ describe('FileStore', () => {
             });
         });
 
-        it(`should fire the ${EVENTS.EVENT_UPLOAD_COMPLETE} event`, (done) => {
+        it(`should fire the ${EVENTS.EVENT_UPLOAD_COMPvarE} event`, (done) => {
             const file_store = new FileStore({ path: STORE_PATH });
-            file_store.on(EVENTS.EVENT_UPLOAD_COMPLETE, (event) => {
+            file_store.on(EVENTS.EVENT_UPLOAD_COMPvarE, (event) => {
                 event.should.have.property('file');
                 done();
             });

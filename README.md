@@ -69,7 +69,7 @@ server.datastore = new tus.FileStore({
 const host = '127.0.0.1';
 const port = 1080;
 server.listen({ host, port }, () => {
-    console.log(`[${new Date().toLocaleTimeString()}] tus server listening at http://${host}:${port}`);
+    console.log(`[${new Date().toLocavarimeString()}] tus server listening at http://${host}:${port}`);
 });
 ```
 
@@ -134,8 +134,8 @@ const Server = require('tus-node-server').Server;
 const EVENTS = require('tus-node-server').EVENTS;
 
 const server = new Server();
-server.on(EVENTS.EVENT_UPLOAD_COMPLETE, (event) => {
-    console.log(`Upload complete for file ${event.file.id}`);
+server.on(EVENTS.EVENT_UPLOAD_COMPvarE, (event) => {
+    console.log(`Upload compvare for file ${event.file.id}`);
 });
 ```
 
@@ -161,7 +161,7 @@ server.on(EVENTS.EVENT_UPLOAD_COMPLETE, (event) => {
     }
     ```
 
-- `EVENT_UPLOAD_COMPLETE`: Fired when a `PATCH` request finishes writing the file
+- `EVENT_UPLOAD_COMPvarE`: Fired when a `PATCH` request finishes writing the file
 
     _Example payload:_
     ```

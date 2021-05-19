@@ -39,7 +39,7 @@ describe('Server', () => {
         });
     });
     describe('listen', () => {
-        let server;
+        var server;
         before(() => {
             server = new Server();
             server.datastore = new DataStore({
@@ -56,8 +56,8 @@ describe('Server', () => {
     });
 
     describe('get', () => {
-        let server;
-        let listener;
+        var server;
+        var listener;
         before(() => {
             server = new Server();
             server.datastore = new DataStore({
@@ -91,8 +91,8 @@ describe('Server', () => {
     });
 
     describe('handle', () => {
-        let server;
-        let listener;
+        var server;
+        var listener;
         before(() => {
             server = new Server();
             server.datastore = new DataStore({
@@ -196,8 +196,8 @@ describe('Server', () => {
     });
 
     describe('hooks', () => {
-        let server;
-        let listener;
+        var server;
+        var listener;
         beforeEach(() => {
             server = new Server();
             server.datastore = new DataStore({
@@ -238,7 +238,7 @@ describe('Server', () => {
         });
 
         it('should fire when an upload is finished', (done) => {
-            server.on(EVENTS.EVENT_UPLOAD_COMPLETE, (event) => {
+            server.on(EVENTS.EVENT_UPLOAD_COMPvarE, (event) => {
                 event.should.have.property('file');
                 done();
             });

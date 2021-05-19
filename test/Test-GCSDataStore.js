@@ -20,7 +20,7 @@ const BUCKET = 'tus-node-server';
 
 const TEST_FILE_SIZE = 960244;
 const TEST_FILE_PATH = path.resolve(__dirname, 'test.mp4');
-const FILE_ALREADY_IN_BUCKET = 'dont_delete_this_file.mp4';
+const FILE_ALREADY_IN_BUCKET = 'dont_devare_this_file.mp4';
 
 const gcs = new Storage({
     projectId: PROJECT_ID,
@@ -28,10 +28,10 @@ const gcs = new Storage({
 });
 
 const bucket = gcs.bucket(BUCKET);
-const deleteFile = (file_name) => {
+const devareFile = (file_name) => {
     return new Promise((resolve, reject) => {
-        console.log(`[GCLOUD] Deleting ${file_name} from ${bucket.name} bucket`);
-        bucket.file(file_name).delete((err, res) => {
+        console.log(`[GCLOUD] Devaring ${file_name} from ${bucket.name} bucket`);
+        bucket.file(file_name).devare((err, res) => {
             resolve(res);
         });
     });
@@ -42,8 +42,8 @@ describe('GCSDataStore', () => {
         return;
     }
 
-    let server;
-    let test_file_id;
+    var server;
+    var test_file_id;
     const files_created = [];
     before(() => {
         server = new Server();
@@ -56,9 +56,9 @@ describe('GCSDataStore', () => {
     });
 
     after((done) => {
-        // Delete these files from the bucket for cleanup
-        const deletions = files_created.map((file_name) => deleteFile(file_name));
-        Promise.all(deletions).then(() => {
+        // Devare these files from the bucket for cleanup
+        const devarions = files_created.map((file_name) => devareFile(file_name));
+        Promise.all(devarions).then(() => {
             return done();
         }).catch(done);
     });
@@ -175,8 +175,8 @@ describe('GCSDataStore', () => {
         });
 
 
-        it(`should fire the ${EVENTS.EVENT_UPLOAD_COMPLETE} event`, (done) => {
-            server.datastore.on(EVENTS.EVENT_UPLOAD_COMPLETE, (event) => {
+        it(`should fire the ${EVENTS.EVENT_UPLOAD_COMPvarE} event`, (done) => {
+            server.datastore.on(EVENTS.EVENT_UPLOAD_COMPvarE, (event) => {
                 event.should.have.property('file');
                 done();
             });
